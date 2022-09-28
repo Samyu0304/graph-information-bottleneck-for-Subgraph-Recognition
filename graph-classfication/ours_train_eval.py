@@ -161,11 +161,11 @@ def MI_Est(discriminator, embeddings, positive):
     margin = discriminator(shuffle_embeddings,positive)
 
     #Donsker
-    #mi_est = torch.mean(joint) - torch.clamp(torch.log(torch.mean(torch.exp(margin))),-100000,100000)
+    mi_est = torch.mean(joint) - torch.clamp(torch.log(torch.mean(torch.exp(margin))),-100000,100000)
     #JSD
     #mi_est = -torch.mean(F.softplus(-joint)) - torch.mean(F.softplus(-margin)+margin)
-    #
-    mi_est = torch.mean(joint**2) - 0.5* torch.mean((torch.sqrt(margin**2)+1.0)**2)
+    #x^{2}
+    #mi_est = torch.mean(joint**2) - 0.5* torch.mean((torch.sqrt(margin**2)+1.0)**2)
     return mi_est
 
 
